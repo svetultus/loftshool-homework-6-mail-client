@@ -12,12 +12,18 @@ import { DataProvider } from '../../context/Data';
 //                и текущий статус isAuthorized
 // BrowserRouter - провайдер react-router-dom.
 
-export default () => (
-  <DataProvider>
-    <AuthProvider>
-      <BrowserRouter>
-        <Switch>
-          {/*
+export default () => {
+  const appRouter = () => <AppRouter />;
+  const loginForm = () => <LoginForm />;
+
+  return (
+    <DataProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/app" component={appRouter} />
+            <Route path="/login" component={loginForm} />
+            {/*
             Добавьте роуты /app и /login.
             Роут /app должен быть доступен 
             только авторизованному пользователю,
@@ -28,8 +34,9 @@ export default () => (
             /app будет использовать AppRouter в качестве вью
             /login будет использовать LoginForm
           */}
-        </Switch>
-      </BrowserRouter>
-    </AuthProvider>
-  </DataProvider>
-);
+          </Switch>
+        </BrowserRouter>
+      </AuthProvider>
+    </DataProvider>
+  );
+};
