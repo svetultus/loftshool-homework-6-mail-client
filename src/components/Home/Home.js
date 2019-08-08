@@ -3,4 +3,6 @@ import React from 'react';
 // Он должен показывать приветствие.
 // Изучите файл `/cypress/integration/homework.spec.js`, чтобы понять,
 // какие классы должен использовать компонент.
-export default () => <div className="home">Home33</div>;
+export default () => (
+  <div className="home">Приветствуем в почтовом клиенте!</div>
+);

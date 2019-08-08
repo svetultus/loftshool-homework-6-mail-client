@@ -1,12 +1,14 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import Home from '../Home';
-import InboxList from '../InboxList';
-import InboxMail from '../InboxMail';
-import OutboxList from '../OutboxList';
-import OutboxMail from '../OutboxMail';
-import { AuthProvider } from '../../context/Auth';
-import { DataProvider } from '../../context/Data';
+// import { BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import Home from '../Home';
+// import LoginForm from '../LoginForm';
+// import InboxList from '../InboxList';
+// import InboxMail from '../InboxMail';
+// import OutboxList from '../OutboxList';
+// import OutboxMail from '../OutboxMail';
+// import { AuthProvider } from '../../context/Auth';
+// import { DataProvider, withData } from '../../context/Data';
 import '../AppRouter/AppRouter.module.css';
 
 // Реализуйте роутер приложения.
@@ -22,26 +24,38 @@ import '../AppRouter/AppRouter.module.css';
 // используйте стили из AppRouter.module.css
 
 export default () => {
-  const home = () => <Home />;
-  const inboxList = () => <InboxList />;
-  const inboxMail = () => <InboxMail />;
-  const outboxList = () => <OutboxList />;
-  const outboxMail = () => <OutboxMail />;
+  // const home = () => <Home />;
+  // const inboxList = () => <InboxList />;
+  // const inboxMail = () => <InboxMail />;
+  // const outboxList = () => <OutboxList />;
+  // const outboxMail = () => <OutboxMail />;
+  // const loginForm = () => <LoginForm />;
 
   return (
-    <DataProvider>
-      <AuthProvider>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/home" component={home} />
-            <Route path="/inboxList" component={inboxList} />
-            <Route path="/inboxMail" component={inboxMail} />
-            <Route path="/outboxList" component={outboxList} />
-            <Route path="/outboxMail" component={outboxMail} />
-            <Redirect to="/home" />
-          </Switch>
-        </BrowserRouter>
-      </AuthProvider>
-    </DataProvider>
+    <div className="AppRouter_container">
+      <ul className="AppRouter_navList t-nav-list">
+        <li className="AppRouter_navElement">
+          <Link className="AppRouter_linkt-link-home active" to="/home">
+            Home
+          </Link>
+        </li>
+        <li className="AppRouter_navElement">
+          <Link className="AppRouter_linkt-link-home active" to="/login">
+            Login
+          </Link>
+        </li>
+        <li className="AppRouter_navElement">
+          <Link className="AppRouter_linkt-link-inbox" to="/inbox">
+            Inbox
+          </Link>
+        </li>
+        <li className="AppRouter_navElement">
+          <Link className="AppRouter_linkt-link-outbox" to="/outbox">
+            Outbox
+          </Link>
+        </li>
+      </ul>
+      <div className="AppRouter_content" />
+    </div>
   );
 };

@@ -1,10 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute';
-import LoginForm from '../LoginForm';
+
 import AppRouter from '../AppRouter';
 import { AuthProvider } from '../../context/Auth';
 import { DataProvider } from '../../context/Data';
+import Home from '../Home';
+import LoginForm from '../LoginForm';
+import InboxList from '../InboxList';
+import InboxMail from '../InboxMail';
+import OutboxList from '../OutboxList';
+import OutboxMail from '../OutboxMail';
 
 // Мы оборачиваем наши роуты в несколько провайдеров
 // DataProvider - предоставляет обьект data с имейлами.
@@ -15,14 +21,25 @@ import { DataProvider } from '../../context/Data';
 export default () => {
   const appRouter = () => <AppRouter />;
   const loginForm = () => <LoginForm />;
+  const home = () => <Home />;
+  //const inboxList = withData(props => <InboxList {...props} />);
+  const inboxList = () => <InboxList />;
+  const inboxMail = () => <InboxMail />;
+  const outboxList = () => <OutboxList />;
+  const outboxMail = () => <OutboxMail />;
 
   return (
     <DataProvider>
       <AuthProvider>
         <BrowserRouter>
           <Switch>
-            <Route path="/app" component={appRouter} />
+            <Route path="/app" component={appRouter} exact />
             <Route path="/login" component={loginForm} />
+            <Route path="/home" component={home} />
+            <Route path="/inbox" component={inboxList} />
+            <Route path="/inboxMail" component={inboxMail} />
+            <Route path="/outbox" component={outboxList} />
+            <Route path="/outboxMail" component={outboxMail} />
             {/*
             Добавьте роуты /app и /login.
             Роут /app должен быть доступен 
