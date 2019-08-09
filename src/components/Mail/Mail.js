@@ -1,17 +1,22 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 // Изучите файл `/cypress/integration/homework.spec.js`, чтобы понять,
 // какие классы должен использовать компонент.
-export default () => (
-  <div className="Mail_container__XSb8H">
-    <p className="t-mail-from">
-      From: <b>jeck@gmail.com</b>
-    </p>
-    <p className="t-mail-body">
-      Оля! СРОЧНО пришли данные за 1—8 августа! Но постойте... Это же невежливо!
-      Что обо мне подумает Оля? Тем более, она не обязана всё бросать и
-      присылать мне данные. Надо сделать вежливо и как будто я не давлю, но
-      чтобы она захотела отправить скорее. Кажется, на курсах делового письма
-      нас учили заранее благодарить, как бы авансом.{' '}
-    </p>
-  </div>
-);
+export default ({ match, type, data }) => {
+  const id = match.params.id;
+  const messagelist = data[type];
+  const message = messagelist.find(elem => {
+    return elem.id === id;
+  });
+
+  return message ? (
+    <div className="Mail_container">
+      <p className="t-mail-from">
+        From: <b>{message.from}</b>
+      </p>
+      <p className="t-mail-body">{message.body}</p>
+    </div>
+  ) : (
+    <Redirect to={'/app/' + type} />
+  );
+};

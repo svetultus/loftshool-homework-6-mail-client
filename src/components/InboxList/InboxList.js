@@ -8,25 +8,21 @@ import React from 'react';
 import MailList from '../MailList';
 import Mail from '../Mail';
 import { withData } from '../../context/Data';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 export default class extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    const mailList = withData(props => <MailList type="inbox" {...props} />);
-    const mail = withData(props => <Mail {...props} />);
+    const List = withData(props => <MailList type="inbox" {...props} />);
+    const Message = withData(props => <Mail type="inbox" {...props} />);
     return (
       <React.Fragment>
         <h3 className="AppRouter_title">Inbox</h3>
         <div className="MailList_container t-inbox-list">
           <Switch>
-            <Route exact path="/inbox" component={mailList} />
-            <Route path="/inbox/:id" component={mail} />
+            <Route path="/app/inbox" exact component={List} />
+            <Route path="/app/inbox/:id" component={Message} />
+            <Redirect to="/app/inbox" />
           </Switch>
-          {/* <List type="inbox" /> */}
         </div>
       </React.Fragment>
     );

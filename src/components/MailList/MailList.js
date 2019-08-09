@@ -11,7 +11,7 @@ export default props => {
     <React.Fragment>
       {mailList.map(elem => {
         const header = elem.body.slice(0, 51).trim() + '...';
-        const href = '/inbox/' + elem.id;
+        const href = `/app/${type}/${elem.id}`;
 
         return (
           <Link className="MailList_link" to={href} key={elem.id}>

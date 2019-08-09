@@ -20,27 +20,16 @@ import OutboxMail from '../OutboxMail';
 
 export default () => {
   const appRouter = () => <AppRouter />;
-  //const loginForm = () => <LoginForm />;
   const loginForm = withAuth(props => <LoginForm {...props} />);
-  const home = () => <Home />;
-  //const inboxList = withData(props => <InboxList {...props} />);
-  const inboxList = () => <InboxList />;
-  const inboxMail = () => <InboxMail />;
-  const outboxList = () => <OutboxList />;
-  const outboxMail = () => <OutboxMail />;
 
   return (
     <DataProvider>
       <AuthProvider>
         <BrowserRouter>
           <Switch>
-            <Route path="/app" component={appRouter} exact />
+            <PrivateRoute path="/app" component={appRouter} />
             <Route path="/login" component={loginForm} />
-            <Route path="/home" component={home} />
-            <Route path="/inbox" component={inboxList} />
-            <Route path="/inboxMail" component={inboxMail} />
-            <Route path="/outbox" component={outboxList} />
-            <Route path="/outboxMail" component={outboxMail} />
+            <Redirect to="/login" component={loginForm} />
             {/*
             Добавьте роуты /app и /login.
             Роут /app должен быть доступен 

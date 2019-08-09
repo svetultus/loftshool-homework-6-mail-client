@@ -9,13 +9,16 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
 // Когда пользователь авторизован - перенаправьте его на роут /app
 
 function Form(props) {
+  const { authError, authorize } = props;
+
   function onSubmit(e) {
     e.preventDefault();
-    const { authError, authorize } = props;
+
     const form = e.target.closest('.LoginForm');
-    console.log(e.target, form.email.value, form.password.value);
+
     onSubmit = authorize(form.email.value, form.password.value);
   }
+
   return (
     <form className="LoginForm">
       <div className="LoginForm_form t-form">
@@ -39,6 +42,7 @@ function Form(props) {
             className="LoginForm_input t-input-password"
           />
         </p>
+        {authError && <p className="LoginForm_error">{authError}</p>}
         <div className="LoginForm_buttons">
           <button
             className="LoginForm_button t-login"
@@ -55,8 +59,8 @@ function Form(props) {
 }
 
 export default props => {
-  console.log(props.isAuthorized);
   const { isAuthorized, authError, authorize } = props;
+
   return !isAuthorized ? (
     <Form authError={authError} authorize={authorize} />
   ) : (
