@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute';
 
 import AppRouter from '../AppRouter';
-import { AuthProvider } from '../../context/Auth';
+import { AuthProvider, withAuth } from '../../context/Auth';
 import { DataProvider } from '../../context/Data';
 import Home from '../Home';
 import LoginForm from '../LoginForm';
@@ -20,7 +20,8 @@ import OutboxMail from '../OutboxMail';
 
 export default () => {
   const appRouter = () => <AppRouter />;
-  const loginForm = () => <LoginForm />;
+  //const loginForm = () => <LoginForm />;
+  const loginForm = withAuth(props => <LoginForm {...props} />);
   const home = () => <Home />;
   //const inboxList = withData(props => <InboxList {...props} />);
   const inboxList = () => <InboxList />;
