@@ -1,6 +1,6 @@
 import React from 'react';
-import { withAuth } from '../../context/Auth';
-import { BrowserRouter, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import styles from './LoginForm.module.css';
 
 // Реализуйте компонент формы логина.
 // Используйте `/contexts/Auth` для получения метода authorize
@@ -14,38 +14,38 @@ function Form(props) {
   function onSubmit(e) {
     e.preventDefault();
 
-    const form = e.target.closest('.LoginForm');
+    const form = e.target.closest('form');
 
     onSubmit = authorize(form.email.value, form.password.value);
   }
 
   return (
-    <form className="LoginForm">
-      <div className="LoginForm_form t-form">
+    <form className={styles.bg}>
+      <div className={styles.form + ' t-form'}>
         <p>
           <label htmlFor="email">
-            <span className="LoginForm_labelText">Почта</span>
+            <span className={styles.labelText}>Почта</span>
           </label>
           <input
             type="text"
             name="email"
-            className="LoginForm_input t-input-email"
+            className={styles.input + ' t-input-email'}
           />
         </p>
         <p>
           <label htmlFor="password">
-            <span className="LoginForm_labelText">Пароль</span>
+            <span className={styles.labelText}>Пароль</span>
           </label>
           <input
             type="password"
             name="password"
-            className="LoginForm_input t-input-password"
+            className={styles.input + ' t-input-password'}
           />
         </p>
-        {authError && <p className="LoginForm_error">{authError}</p>}
-        <div className="LoginForm_buttons">
+        {authError && <p className={styles.error}>{authError}</p>}
+        <div className={styles.buttons}>
           <button
-            className="LoginForm_button t-login"
+            className={styles.button + ' t-login'}
             type="submit"
             onSubmit={onSubmit}
             onClick={onSubmit}

@@ -2,6 +2,7 @@
 // какие классы должен использовать компонент.
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from './MailList.module.css';
 
 export default props => {
   const { type, data } = props;
@@ -14,7 +15,7 @@ export default props => {
         const href = `/app/${type}/${elem.id}`;
 
         return (
-          <Link className="MailList_link" to={href} key={elem.id}>
+          <Link className={styles.link} to={href} key={elem.id}>
             {header}
           </Link>
         );

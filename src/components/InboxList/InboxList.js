@@ -9,6 +9,7 @@ import MailList from '../MailList';
 import Mail from '../Mail';
 import { withData } from '../../context/Data';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import styles from './InboxList.module.css';
 
 export default class extends React.Component {
   render() {
@@ -16,8 +17,7 @@ export default class extends React.Component {
     const Message = withData(props => <Mail type="inbox" {...props} />);
     return (
       <React.Fragment>
-        <h3 className="AppRouter_title">Inbox</h3>
-        <div className="MailList_container t-inbox-list">
+        <div className={styles.container + ' t-inbox-list'}>
           <Switch>
             <Route path="/app/inbox" exact component={List} />
             <Route path="/app/inbox/:id" component={Message} />
